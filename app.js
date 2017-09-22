@@ -17,9 +17,8 @@ app.set('views', path.join(__dirname, 'views'));
 // Set public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
 app.get('/', function(req, res, next){
+    // options object for the sendFile method
     var options = {
       root: __dirname + '/views/',
       dotfiles: 'deny',
@@ -30,6 +29,7 @@ app.get('/', function(req, res, next){
     };
 
     var fileName = 'index.html'
+    
     res.sendFile(fileName, options, function(err){
         if(err) {
           next(err);
