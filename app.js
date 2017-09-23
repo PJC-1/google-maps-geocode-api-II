@@ -6,8 +6,6 @@ const dotenv = require('dotenv');
 // DOTENV
 dotenv.config();
 
-console.log(process.env.YOUR_API_KEY);
-
 // Init app
 const app = express();
 
@@ -20,19 +18,19 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res, next){
     // options object for the sendFile method
     var options = {
-      root: __dirname + '/views/',
-      dotfiles: 'deny',
-      headers: {
-        'x-timestamp': Date.now(),
-        'x-sent': true
-      }
+        root : __dirname + '/views/',
+        dotfiles : 'deny',
+        headers : {
+            'x-timestamp' : Date.now(),
+            'x-sent' : true
+        }
     };
 
     var fileName = 'index.html'
-    
+
     res.sendFile(fileName, options, function(err){
         if(err) {
-          next(err);
+            next(err);
         } else {
             console.log('Sent:', fileName);
         }
