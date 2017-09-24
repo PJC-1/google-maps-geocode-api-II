@@ -14,7 +14,6 @@ function geocode(e){
         params:{
             address: location,
             key:'AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs'
-            // AIzaSyB6VTQwAo7MD54EgCzjUvfbmDCdP0jbFXA
         }
     })
     .then(function(response){
@@ -55,6 +54,7 @@ function geocode(e){
         document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
         document.getElementById('address-components').innerHTML = addressComponentsOutput;
         document.getElementById('geometry').innerHTML = geometryOutput;
+
     })
     .catch(function(error){
         console.log(error);
@@ -71,10 +71,57 @@ function initMap(){
     // New map
     var map = new google.maps.Map(document.getElementById('map'), options);
 
-    // New marker
-    var marker = new google.maps.Marker({
-        position:{lat:37.7911281,lng:-122.401254},
-        map:map,
-        icon:'http://maps.google.com/mapfiles/ms/micons/purple-dot.png'
-    });
+    // // New marker
+    // var marker = new google.maps.Marker({
+    //     position:{lat:37.7911281,lng:-122.401254},
+    //     map:map,
+    //     icon:'http://maps.google.com/mapfiles/ms/micons/purple-dot.png'
+    // });
+    //
+    // var infoWindow = new google.maps.InfoWindow({
+    //     content:'<h1>SF =)</h1>'
+    // });
+    //
+    // marker.addListener('click', function(){
+    //     infoWindow.open(map, marker);
+    // });
+    var markers = [
+        {
+          coords:{lat:37.7911281,lng:-122.401254},
+          iconImage:'http://maps.google.com/mapfiles/ms/micons/purple-dot.png',
+          content:'<h1>222 Bush Street</h1>'
+        },
+        {
+          coords:{lat:37.789578,lng:-122.414261}
+        }
+    ];
+
+    // Loop through markers
+    for(var i=0;i<markers.length;i++){
+      addMarker(markers[i]);
+    }
+
+
+    // Add Marker Function
+    function addMarker(props){
+      var marker = new google.maps.Marker({
+          position: props.coords,
+          map:map
+      });
+      // Check for customicon
+      if(props.iconImage){
+          // Set icon image
+          marker.setIcon(props.iconImage);
+      }
+      // Check for content
+      if(props.content){
+          var infoWindow = new google.maps.InfoWindow({
+              content:props.content
+          });
+
+          marker.addListener('click', function(){
+              infoWindow.open(map, marker);
+          });
+      }
+    }
 }
