@@ -33,9 +33,20 @@ function geocode(){
         }
         addressComponentsOutput += '</ul>';
 
+        // Geometry
+        var lat = response.data.results[0].geometry.location.lat;
+        var lng = response.data.results[0].geometry.location.lng;
+        var geometryOutput = `
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Latitude</strong>: ${lat}</li>
+            <li class="list-group-item"><strong>Longitude</strong>: ${lng}</li>
+          </ul>
+        `;
+
         // Output to app
         document.getElementById('formatted-address').innerHTML = formattedAddressOutput;
         document.getElementById('address-components').innerHTML = addressComponentsOutput;
+        document.getElementById('geometry').innerHTML = geometryOutput;
     })
     .catch(function(error){
         console.log(error);
