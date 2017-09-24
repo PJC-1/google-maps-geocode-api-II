@@ -71,6 +71,13 @@ function initMap(){
     // New map
     var map = new google.maps.Map(document.getElementById('map'), options);
 
+    // Listen for click on map
+    google.maps.event.addListener(map, 'click',
+      function(event){
+        // Add marker
+        addMarker({coords:event.latLng});
+    });
+
     // // New marker
     // var marker = new google.maps.Marker({
     //     position:{lat:37.7911281,lng:-122.401254},
