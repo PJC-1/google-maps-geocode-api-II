@@ -7,7 +7,8 @@ locationForm.addEventListener('submit', geocode);
 function geocode(e){
     // Precent actual submit
     e.preventDefault();
-    var location = '222 Bush Street San Fracisco CA';
+
+    var location = document.getElementById('location-input').value;
 
     axios.get('https://maps.googleapis.com/maps/api/geocode/json',{
         params:{
