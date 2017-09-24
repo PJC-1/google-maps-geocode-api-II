@@ -14,6 +14,7 @@ function geocode(e){
         params:{
             address: location,
             key:'AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs'
+            // AIzaSyB6VTQwAo7MD54EgCzjUvfbmDCdP0jbFXA
         }
     })
     .then(function(response){
@@ -57,5 +58,23 @@ function geocode(e){
     })
     .catch(function(error){
         console.log(error);
+    });
+}
+
+function initMap(){
+    // Map options
+    var options = {
+        zoom : 12,
+        center : {lat:37.7749,lng:-122.431297}
+    }
+
+    // New map
+    var map = new google.maps.Map(document.getElementById('map'), options);
+
+    // New marker
+    var marker = new google.maps.Marker({
+        position:{lat:37.7911281,lng:-122.401254},
+        map:map,
+        icon:'http://maps.google.com/mapfiles/ms/micons/purple-dot.png'
     });
 }
