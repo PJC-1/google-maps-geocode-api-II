@@ -1,5 +1,6 @@
 // Get Location form
 var locationForm = document.getElementById('location-form');
+var map;
 
 // Listen for submit
 locationForm.addEventListener('submit', geocode);
@@ -55,6 +56,11 @@ function geocode(e){
         document.getElementById('address-components').innerHTML = addressComponentsOutput;
         document.getElementById('geometry').innerHTML = geometryOutput;
 
+        new google.maps.Marker({
+            position: new google.maps.LatLng(lat,lng),
+            map:map
+        });
+
     })
     .catch(function(error){
         console.log(error);
@@ -69,7 +75,7 @@ function initMap(){
     }
 
     // New map
-    var map = new google.maps.Map(document.getElementById('map'), options);
+    map = new google.maps.Map(document.getElementById('map'), options);
 
     // Listen for click on map
     google.maps.event.addListener(map, 'click',
