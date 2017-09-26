@@ -57,10 +57,8 @@ function geocode(e){
         document.getElementById('address-components').innerHTML = addressComponentsOutput;
         document.getElementById('geometry').innerHTML = geometryOutput;
 
-        new google.maps.Marker({
-            position: new google.maps.LatLng(lat,lng),
-            map:map
-        });
+        addMarker2(lat,lng,map);
+
     })
     .catch(function(error){
         console.log(error);
@@ -114,6 +112,17 @@ function initMap(){
       addMarker(markers[i]);
     }
 }
+
+// addMarker2
+
+function addMarker2(latitude,longitude,useMap){
+  var latLng = new google.maps.LatLng(latitude, longitude);
+  new google.maps.Marker({
+      position: latLng,
+      map:useMap
+  });
+}
+
 
 // Add Marker Function
 function addMarker(props){
