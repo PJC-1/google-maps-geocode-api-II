@@ -61,7 +61,6 @@ function geocode(e){
             position: new google.maps.LatLng(lat,lng),
             map:map
         });
-
     })
     .catch(function(error){
         console.log(error);

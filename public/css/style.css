@@ -3,6 +3,7 @@ body{
 }
 
 #map{
-  height: 400px;
-  width: 100%;
+  margin:auto;
+  height: 485px;
+  width: 58%;
 }
