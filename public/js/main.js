@@ -1,5 +1,6 @@
 // Get Location form
 var locationForm = document.getElementById('location-form');
+// Set map variable definition here to give the Maps object global scope
 var map;
 
 // Listen for submit
@@ -113,28 +114,27 @@ function initMap(){
     for(var i=0;i<markers.length;i++){
       addMarker(markers[i]);
     }
+}
 
-
-    // Add Marker Function
-    function addMarker(props){
-      var marker = new google.maps.Marker({
-          position: props.coords,
-          map:map
+// Add Marker Function
+function addMarker(props){
+  var marker = new google.maps.Marker({
+      position: props.coords,
+      map:map
+  });
+  // Check for customicon
+  if(props.iconImage){
+      // Set icon image
+      marker.setIcon(props.iconImage);
+  }
+  // Check for content
+  if(props.content){
+      var infoWindow = new google.maps.InfoWindow({
+          content:props.content
       });
-      // Check for customicon
-      if(props.iconImage){
-          // Set icon image
-          marker.setIcon(props.iconImage);
-      }
-      // Check for content
-      if(props.content){
-          var infoWindow = new google.maps.InfoWindow({
-              content:props.content
-          });
 
-          marker.addListener('click', function(){
-              infoWindow.open(map, marker);
-          });
-      }
-    }
+      marker.addListener('click', function(){
+          infoWindow.open(map, marker);
+      });
+  }
 }
