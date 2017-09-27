@@ -9,7 +9,6 @@ dotenv.config();
 
 // Connect to mongodb
 mongoose.connect('mongodb://localhost/googleAPI');
-
 let db = mongoose.connection;
 
 // Check for DB errors
@@ -24,6 +23,9 @@ db.once('open', function(){
 
 // Init app
 const app = express();
+
+// Bring in Models
+let Location = require('./models/location');
 
 // Load View
 app.set('views', path.join(__dirname, 'views'));
@@ -43,12 +45,18 @@ app.get('/', function(req, res, next){
     };
 
     var fileName = 'index.html'
-
-    res.sendFile(fileName, options, function(err){
-        if(err) {
-            next(err);
+    Location.find({}, function(err, locations){
+        if(err){
+            console.log(err);
         } else {
-            console.log('Sent:', fileName);
+            console.log(locations);
+            res.sendFile(fileName, options, function(err){
+                if(err) {
+                    next(err);
+                } else {
+                    console.log('Sent:', fileName);
+                }
+            });
         }
     });
 });
