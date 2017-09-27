@@ -9,4 +9,4 @@
 
 - This to do with this mini project:
 - Set up mongoDB
-- Create a Location model that would be a resource in the datebase and would consist of the latitude and longitude.
+- Create a Location model that would be a resource in the datebase and would consist of the latitude, longitude, and the formatted address would be a good idea to start.

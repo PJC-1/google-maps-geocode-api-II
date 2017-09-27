@@ -1,10 +1,26 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
 
 // DOTENV
 dotenv.config();
+
+// Connect to mongodb
+mongoose.connect('mongodb://localhost/googleAPI');
+
+let db = mongoose.connection;
+
+// Check for DB errors
+db.on('error', function(err){
+  console.log(err);
+})
+
+// Check connection
+db.once('open', function(){
+    console.log('connected to mongodb');
+});
 
 // Init app
 const app = express();
