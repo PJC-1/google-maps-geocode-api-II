@@ -82,20 +82,6 @@ function initMap(){
         addMarker({coords:event.latLng});
     });
 
-    // // New marker
-    // var marker = new google.maps.Marker({
-    //     position:{lat:37.7911281,lng:-122.401254},
-    //     map:map,
-    //     icon:'http://maps.google.com/mapfiles/ms/micons/purple-dot.png'
-    // });
-    //
-    // var infoWindow = new google.maps.InfoWindow({
-    //     content:'<h1>SF =)</h1>'
-    // });
-    //
-    // marker.addListener('click', function(){
-    //     infoWindow.open(map, marker);
-    // });
     var markers = [
         {
           coords:{lat:37.7911281,lng:-122.401254},
@@ -114,7 +100,6 @@ function initMap(){
 }
 
 // addMarker2
-
 function addMarker2(latitude,longitude,useMap){
   var latLng = new google.maps.LatLng(latitude, longitude);
   new google.maps.Marker({
