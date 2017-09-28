@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-
+const axios = require('axios');
 
 // DOTENV
 dotenv.config();
@@ -29,10 +29,34 @@ let Location = require('./models/location');
 
 // Load View
 app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'pug');
 
 // Set public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Test making a request with axios
+let url = 'https://maps.googleapis.com/maps/api/geocode/json';
+let location = '865 Greenwich St, San Francisco, CA 94133, USA';
+app.get('/pug', function(req, res){
+    axios
+      .get(url, {
+        params:{
+            address: location,
+            key:'AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs'
+        }
+      })
+      .then(function (response){
+        console.log(response.data.results[0].formatted_address);
+        res.render('index', {
+            title: response.data.results[0].formatted_address
+        });
+      })
+      .catch(function(error){
+        console.log(error);
+      });
+});
+
+// Home Route
 app.get('/', function(req, res, next){
     // options object for the sendFile method
     var options = {
