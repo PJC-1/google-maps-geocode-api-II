@@ -37,22 +37,25 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Test making a request with axios
 let url = 'https://maps.googleapis.com/maps/api/geocode/json';
 let location = '865 Greenwich St, San Francisco, CA 94133, USA';
+
 app.get('/pug', function(req, res){
     axios
       .get(url, {
-        params:{
-            address: location,
-            key:'AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs'
-        }
+          params:{
+              address : location,
+              key     : 'AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs'
+          }
       })
       .then(function (response){
-        console.log(response.data.results[0].formatted_address);
-        res.render('index', {
-            title: response.data.results[0].formatted_address
-        });
+          console.log(response.data.results[0].formatted_address);
+          res.render('index', {
+              latitude  : response.data.results[0].geometry.location.lat,
+              longitude : response.data.results[0].geometry.location.lng,
+              address   : response.data.results[0].formatted_address
+          });
       })
       .catch(function(error){
-        console.log(error);
+          console.log(error);
       });
 });
 
@@ -60,11 +63,11 @@ app.get('/pug', function(req, res){
 app.get('/', function(req, res, next){
     // options object for the sendFile method
     var options = {
-        root : __dirname + '/views/',
+        root     : __dirname + '/views/',
         dotfiles : 'deny',
-        headers : {
+        headers  : {
             'x-timestamp' : Date.now(),
-            'x-sent' : true
+            'x-sent'      : true
         }
     };
 
