@@ -38,25 +38,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 let url = 'https://maps.googleapis.com/maps/api/geocode/json';
 let location = '865 Greenwich St, San Francisco, CA 94133, USA';
 
+
+// Tester
 app.get('/pug', function(req, res){
-    axios
-      .get(url, {
-          params:{
-              address : location,
-              key     : 'AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs'
-          }
-      })
-      .then(function (response){
-          console.log(response.data.results[0].formatted_address);
-          res.render('index', {
-              latitude  : response.data.results[0].geometry.location.lat,
-              longitude : response.data.results[0].geometry.location.lng,
-              address   : response.data.results[0].formatted_address
-          });
-      })
-      .catch(function(error){
-          console.log(error);
-      });
+  res.sendFile(__dirname + '/views/pug.html');
 });
 
 // Home Route

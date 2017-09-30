@@ -11,3 +11,4 @@
 - Set up mongoDB
 - Create a Location model that would be a resource in the datebase and would consist of the latitude, longitude, and the formatted address would be a good idea to start.
 - DB Collection is 'locations'
+- A good post about the difference between res.send() and res.json() https://stackoverflow.com/questions/19041837/difference-between-res-send-and-res-json-in-express-js
