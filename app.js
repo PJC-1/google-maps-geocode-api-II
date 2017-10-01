@@ -3,6 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const axios = require('axios');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 // DOTENV
 dotenv.config();
@@ -18,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended : true }));
 
 // db
 let database = require('./models');
+let Location = require('./models/location');
 
 let locations = [
   {
@@ -40,10 +42,19 @@ let locations = [
   }
 ];
 
+////////////////////
+// HTML ENDPOINTS //
+////////////////////
+
 // root
 app.get('/', function(req, res){
   res.sendFile('views/index.html', {root : __dirname});
 });
+
+
+////////////////////////
+// JSON API ENDPOINTS //
+////////////////////////
 
 // get all locations
 app.get('/api/locations', function(req, res){
