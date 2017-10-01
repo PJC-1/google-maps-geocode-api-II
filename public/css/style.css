@@ -1,9 +1,9 @@
 body{
-  background: red;
+  background : red;
 }
 
 #map{
-  margin:auto;
-  height: 485px;
-  width: 58%;
+  margin : auto;
+  height : 485px;
+  width : 58%;
 }

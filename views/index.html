@@ -3,18 +3,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
     <title>Geocode II</title>
 
     <!-- STYLESHEETS -->
-    <link href="/css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
     <!-- VENDOR SCRIPTS -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
     <!-- APPLICATION SCRIPT -->
     <script src="/js/main.js"></script>
@@ -30,15 +27,13 @@
       <div class="card-block" id="formatted-address"></div>
       <div class="card-block" id="address-components"></div>
       <div class="card-block" id="geometry"></div>
+      <div id='locationTarget'>
+      </div>
+      <div id="map"></div>
     </div>
-    <div id="test-div">
-      <script id="test-template" type="text/x-handlebars-template">
-        {{lat}}
-      </script>
-    </div>
-    <div id="map"></div>
 
 
+    <!-- GOOGLE MAPS API -->
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs&callback=initMap"></script>
 </body>
 </html>

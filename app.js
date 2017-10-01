@@ -47,12 +47,6 @@ app.get('/', function(req, res, next){
   });
 });
 
-// Tester
-app.get('/pug', function(req, res){
-  res.sendFile(__dirname + '/views/pug.html');
-});
-
-
 app.listen(3000, function(){
   console.log('You are now listening to the smooth sounds of port 3000...');
 });
