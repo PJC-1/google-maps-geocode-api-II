@@ -12,17 +12,22 @@ $(document).ready(function(){
     error: handleError
   });
 });
-
+var q = "'";
 function handleSuccess(json){
   allLocations = json;
   console.log('logging server response: ', allLocations);
+  for(var i=0;i<allLocations.length;i++){
+    var lat = allLocations[i].latitude;
+    var lng = allLocations[i].longitude;
+    addMarker2(lat,lng,map);
+  }
 }
 
 function handleError(err){
   console.log(err);
 }
 
-// Listen for submit
+// //Listen for submit
 // locationForm.addEventListener('submit', geocode);
 //
 // function geocode(e){
@@ -104,21 +109,21 @@ function initMap(){
         addMarker({coords:event.latLng});
     });
 
-    var markers = [
-        {
-          coords:{lat:37.7911281,lng:-122.401254},
-          iconImage:'http://maps.google.com/mapfiles/ms/micons/purple-dot.png',
-          content:'<h1>222 Bush Street</h1>'
-        },
-        {
-          coords:{lat:37.789578,lng:-122.414261}
-        }
-    ];
+    // var markers = [
+    //     {
+    //       coords:{lat:37.7911281,lng:-122.401254},
+    //       iconImage:'http://maps.google.com/mapfiles/ms/micons/purple-dot.png',
+    //       content:'<h1>222 Bush Street</h1>'
+    //     },
+    //     {
+    //       coords:{lat:37.789578,lng:-122.414261}
+    //     }
+    // ];
 
     // Loop through markers
-    for(var i=0;i<markers.length;i++){
-      addMarker(markers[i]);
-    }
+    // for(var i=0;i<markers.length;i++){
+    //   addMarker(markers[i]);
+    // }
 }
 
 // addMarker2
