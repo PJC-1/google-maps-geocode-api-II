@@ -3,6 +3,14 @@ var locationForm = document.getElementById('location-form');
 // Set map variable definition here to give the Maps object global scope
 var map;
 
+$(document).ready(function(){
+    var source = $('#test-template').html();
+    var testTemplate = Handlebars.compile(source);
+
+
+
+  });
+
 // Listen for submit
 locationForm.addEventListener('submit', geocode);
 
@@ -58,6 +66,9 @@ function geocode(e){
         document.getElementById('geometry').innerHTML = geometryOutput;
 
         addMarker2(lat,lng,map);
+
+        var testHtml = testTemplate(lat);
+        $('#test-div').html(testHtml);
 
     })
     .catch(function(error){

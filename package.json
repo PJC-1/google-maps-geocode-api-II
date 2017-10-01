@@ -19,9 +19,9 @@
   "homepage": "https://github.com/PJC-1/google-maps-geocode-api-II#readme",
   "dependencies": {
     "axios": "^0.16.2",
+    "body-parser": "^1.18.2",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
-    "mongoose": "^4.10.8",
-    "pug": "^2.0.0-rc.4"
+    "mongoose": "^4.10.8"
   }
 }
