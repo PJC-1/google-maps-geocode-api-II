@@ -1,50 +1,53 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
 const axios = require('axios');
 const bodyParser = require('body-parser');
 
 // DOTENV
 dotenv.config();
 
-// Connect to mongodb
-mongoose.connect('mongodb://localhost/googleAPI');
-let db = mongoose.connection;
-
-// Check for DB errors
-db.on('error', function(err){
-  console.log(err);
-})
-
-// Check connection
-db.once('open', function(){
-  console.log('connected to mongodb');
-});
-
-// Bring in Models
-let Location = require('./models/location');
-
 // Init app
 const app = express();
 
-// Set public directory
+// serve static files in public
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Test making a request with axios
-// let url = 'https://maps.googleapis.com/maps/api/geocode/json';
-// let location = '865 Greenwich St, San Francisco, CA 94133, USA';
+// body parser config to accept our datatypes
+app.use(bodyParser.urlencoded({ extended : true }));
 
-// Home Route
-app.get('/', function(req, res, next){
-  Location.find({}, function(err, locations){
-    if(err){
-      console.log(err);
-    } else {
-      console.log(locations);
-      res.sendFile('views/index.html', {root : __dirname});
-    }
-  });
+// db
+let database = require('./models');
+
+let locations = [
+  {
+    _id: 20,
+    latitude: 37.7911281,
+    longitude: -122.401254,
+    address: '222 Bush St, San Francisco, CA 94104, USA'
+  },
+  {
+    _id: 21,
+    latitude: 37.801692,
+    longitude: -122.413907,
+    address:'865 Greenwich St, San Francisco, CA 94133, USA'
+  },
+  {
+    _id: 22,
+    latitude: 37.797935,
+    longitude: -122.406262,
+    address:'2 Romolo Pl, San Francisco, CA 94133, USA'
+  }
+];
+
+// root
+app.get('/', function(req, res){
+  res.sendFile('views/index.html', {root : __dirname});
+});
+
+// get all locations
+app.get('/api/locations', function(req, res){
+  res.json(locations);
 });
 
 app.listen(3000, function(){

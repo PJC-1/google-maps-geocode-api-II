@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Location Schema
-let locationSchema = new Schema({
+const locationSchema = new Schema({
     latitude : {
         type     : Number,
         required : true
