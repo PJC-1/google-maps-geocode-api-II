@@ -1,9 +1,10 @@
 body{
-  background : red;
+  background : white;
 }
 
 #map{
   margin : auto;
+  margin-top : 80px;
   height : 485px;
   width : 58%;
 }

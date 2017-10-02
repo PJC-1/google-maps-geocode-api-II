@@ -1,7 +1,6 @@
 const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
-const axios = require('axios');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -50,6 +49,10 @@ let locations = [
 app.get('/', function(req, res){
   res.sendFile('views/index.html', {root : __dirname});
 });
+
+app.get('/request', function(req, res){
+  res.sendFile('views/request.html', {root : __dirname});
+})
 
 
 ////////////////////////

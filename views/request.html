@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Geocode II</title>
+
+    <!-- STYLESHEETS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- VENDOR SCRIPTS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+    <!-- APPLICATION SCRIPT -->
+    <script src="/js/request.js"></script>
+</head>
+<body>
+    <div class="container">
+      <h2 id="text-center">Enter Location: </h2>
+      <form id="location-form">
+        <input type="text" id="location-input" class="form-control form-control-lg">
+        <br>
+        <button type="submit" class="btn btn-primary btn-block">SUBMIT</button>
+      </form>
+      <div class="card-block" id="formatted-address"></div>
+      <div class="card-block" id="address-components"></div>
+      <div class="card-block" id="geometry"></div>
+      <div id='locationTarget'>
+      </div>
+      <div id="map"></div>
+    </div>
+
+
+    <!-- GOOGLE MAPS API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs&callback=initMap"></script>
+</body>
+</html>
