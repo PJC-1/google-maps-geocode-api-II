@@ -3,7 +3,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
+const request = require('request');
 // DOTENV
 dotenv.config();
 
@@ -62,6 +62,18 @@ app.get('/request', function(req, res){
 // get all locations
 app.get('/api/locations', function(req, res){
   res.json(locations);
+});
+
+// server request to the database
+app.get('/api/request', function(req, res){
+  Location.find({}, function(err, results){
+    if(err){
+      console.log('error making request from the server...');
+    } else {
+      console.log(results);
+      res.json(results);
+    }
+  });
 });
 
 app.listen(3000, function(){

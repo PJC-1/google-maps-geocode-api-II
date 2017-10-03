@@ -3,6 +3,24 @@ console.log('Sanity check!');
 // Set map variable definition here to give the Maps object global scope
 var map;
 
+$(document).ready(function(){
+    $.ajax({
+        method: 'GET',
+        url: '/api/request',
+        success: handleSuccess,
+        error: handleError
+    });
+
+});
+
+function handleSuccess(results){
+  console.log('success ajax', results);
+}
+
+function handleError(err){
+  console.log('error from ajax ', err);
+}
+
 function initMap(){
     // Map options
     var options = {
