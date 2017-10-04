@@ -11,20 +11,69 @@ $(document).ready(function(){
     success: handleSuccess,
     error: handleError
   });
+
+
+
+
+
+
+  // addMarker2
+  function addMarker2(latitude,longitude,useMap){
+    var latLng = new google.maps.LatLng(latitude, longitude);
+    new google.maps.Marker({
+        position: latLng,
+        map:useMap
+    });
+  }
+
+  // Add Marker Function
+  function addMarker(props){
+    var marker = new google.maps.Marker({
+        position: props.coords,
+        map:map
+    });
+    // Check for customicon
+    if(props.iconImage){
+        // Set icon image
+        marker.setIcon(props.iconImage);
+    }
+    // Check for content
+    if(props.content){
+        var infoWindow = new google.maps.InfoWindow({
+            content:props.content
+        });
+
+        marker.addListener('click', function(){
+            infoWindow.open(map, marker);
+        });
+    }
+  }
+
+  function handleSuccess(response){
+    var locations = response;
+    console.log('logging server response: ', locations);
+    for( var i=0 ; i<locations.length ; i++ ){
+      var lat = locations[i].latitude;
+      var lng = locations[i].longitude;
+      addMarker2(lat,lng,map);
+    }
+  }
+
+  function handleError(err){
+    console.log(err);
+  }
+
 });
 
-function handleSuccess(response){
-  locations = response;
-  console.log('logging server response: ', locations);
-  for( var i=0 ; i<locations.length ; i++ ){
-    var lat = locations[i].latitude;
-    var lng = locations[i].longitude;
-    addMarker2(lat,lng,map);
-  }
-}
 
-function handleError(err){
-  console.log(err);
+function initMap(){
+    // Map options
+    var options = {
+        zoom : 12,
+        center : {lat:37.7749,lng:-122.431297}
+    }
+    // New map
+    map = new google.maps.Map(document.getElementById('map'), options);
 }
 
 // //Listen for submit
@@ -91,45 +140,3 @@ function handleError(err){
 //         console.log(error);
 //     });
 // }
-
-function initMap(){
-    // Map options
-    var options = {
-        zoom : 12,
-        center : {lat:37.7749,lng:-122.431297}
-    }
-    // New map
-    map = new google.maps.Map(document.getElementById('map'), options);
-}
-
-// addMarker2
-function addMarker2(latitude,longitude,useMap){
-  var latLng = new google.maps.LatLng(latitude, longitude);
-  new google.maps.Marker({
-      position: latLng,
-      map:useMap
-  });
-}
-
-// Add Marker Function
-function addMarker(props){
-  var marker = new google.maps.Marker({
-      position: props.coords,
-      map:map
-  });
-  // Check for customicon
-  if(props.iconImage){
-      // Set icon image
-      marker.setIcon(props.iconImage);
-  }
-  // Check for content
-  if(props.content){
-      var infoWindow = new google.maps.InfoWindow({
-          content:props.content
-      });
-
-      marker.addListener('click', function(){
-          infoWindow.open(map, marker);
-      });
-  }
-}

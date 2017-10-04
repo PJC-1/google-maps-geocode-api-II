@@ -11,15 +11,35 @@ $(document).ready(function(){
         error: handleError
     });
 
+    function handleSuccess(results){
+      var locations = results;
+      console.log('success ajax', results);
+      for(var i=0;i<locations.length;i++){
+        var lat = locations[i].latitude;
+        var lng = locations[i].longitude;
+        addMarker2(lat,lng,map);
+      }
+
+    }
+
+    function handleError(err){
+      console.log('error from ajax ', err);
+    }
+
+    // addMarker2
+    function addMarker2(latitude,longitude,useMap){
+      var latLng = new google.maps.LatLng(latitude, longitude);
+      new google.maps.Marker({
+          position: latLng,
+          map:useMap
+      });
+    }
+
+
+
 });
 
-function handleSuccess(results){
-  console.log('success ajax', results);
-}
 
-function handleError(err){
-  console.log('error from ajax ', err);
-}
 
 function initMap(){
     // Map options
@@ -29,13 +49,4 @@ function initMap(){
     }
     // New map
     map = new google.maps.Map(document.getElementById('map'), options);
-}
-
-// addMarker2
-function addMarker2(latitude,longitude,useMap){
-  var latLng = new google.maps.LatLng(latitude, longitude);
-  new google.maps.Marker({
-      position: latLng,
-      map:useMap
-  });
 }
