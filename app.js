@@ -54,6 +54,10 @@ app.get('/request', function(req, res){
   res.sendFile('views/request.html', {root : __dirname});
 })
 
+app.get('/geocode', function(req, res){
+  res.sendFile('views/geocode.html', {root : __dirname});
+})
+
 
 ////////////////////////
 // JSON API ENDPOINTS //
