@@ -81,8 +81,21 @@ app.get('/api/request', function(req, res){
 });
 
 // server request to geocode API
+
+let apiKEY = process.env.YOUR_API_KEY;
+let baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+let address = '222 Bush St, San Francisco, CA 94104, USA';
+let url = baseURL + address + "&key=" + apiKEY;
+
 app.get('/api/geocode', function(req, res){
-  res.send("hello from the server...");
+  request.get(url, function(error, response, body){
+    if(error){
+      res.send('error from req to geocode API', error);
+    } else {
+      var geocodeOutput = JSON.parse(body);
+      res.json(geocodeOutput);
+    }
+  });
 });
 
 app.listen(3000, function(){

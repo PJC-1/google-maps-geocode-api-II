@@ -10,3 +10,4 @@
 - DB Collection is 'locations'
 - A good post about the difference between res.send() and res.json() https://stackoverflow.com/questions/19041837/difference-between-res-send-and-res-json-in-express-js
 - When seeding the db you will not be able to access the model by caching the requiring of the models directory and then accessing the model as an object like database.Model, this will result in an error: "TypeError: Cannot read property 'remove' of undefined". You can debug this by first logging the cached database object and then logging the database.Model, which will return undefined. Solved the issue by requiring the resource's file directly (location.js).
+- Here is a really good stackoverflow about the difference between making your request to the geocode api from the client or the server. https://stackoverflow.com/questions/37001749/how-to-implement-geocoding-responses-using-nodejs-javascript
