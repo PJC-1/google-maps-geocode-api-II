@@ -80,6 +80,11 @@ app.get('/api/request', function(req, res){
   });
 });
 
+// server request to geocode API
+app.get('/api/geocode', function(req, res){
+  res.send("hello from the server...");
+});
+
 app.listen(3000, function(){
   console.log('You are now listening to the smooth sounds of port 3000...');
 });

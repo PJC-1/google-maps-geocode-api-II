@@ -1,6 +1,27 @@
 console.log("loaded geocode.js...");
 
 var map;
+var lat;
+var lng;
+
+$(document).ready(function(){
+
+    $.ajax({
+      method: 'GET',
+      url: '/api/geocode',
+      success: handleSuccess,
+      error: handleError
+    });
+
+    function handleSuccess(results){
+      var geocode = results;
+      console.log(geocode);
+    }
+
+    function handleError(err){
+      console.log(err);
+    }
+});
 
 function initMap(){
     // Map options
