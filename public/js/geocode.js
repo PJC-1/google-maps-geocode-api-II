@@ -15,7 +15,9 @@ $(document).ready(function(){
 
     function handleSuccess(results){
       var geocode = results;
-      console.log(geocode);
+      console.log("latitude ", geocode.results[0].geometry.location.lat);
+      console.log("longitude ", geocode.results[0].geometry.location.lng);
+      console.log("address ", geocode.results[0].formatted_address);
     }
 
     function handleError(err){
