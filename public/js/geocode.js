@@ -6,36 +6,42 @@ var lng;
 
 $(document).ready(function(){
 
-    $.ajax({
-      method: 'GET',
-      url: '/api/geocode',
-      success: handleSuccess,
-      error: handleError
-    });
+    initMap();
+    fetchLocations();
 
-    function handleSuccess(results){
-      var geocode = results;
-      console.log("latitude ", geocode.results[0].geometry.location.lat);
-      console.log("longitude ", geocode.results[0].geometry.location.lng);
-      console.log("address ", geocode.results[0].formatted_address);
-      lat = geocode.results[0].geometry.location.lat;
-      lng = geocode.results[0].geometry.location.lng;
-      address = geocode.results[0].formatted_address;
-      addMarker2(lat,lng,map);
-    }
-
-    function handleError(err){
-      console.log(err);
-    }
-
-    function addMarker2(latitude,longitude,useMap){
-      var latLng = new google.maps.LatLng(latitude, longitude);
-      new google.maps.Marker({
-          position: latLng,
-          map:useMap
-      });
-    }
 });
+
+function addMarker(latitude,longitude,useMap){
+    var latLng = new google.maps.LatLng(latitude, longitude);
+    new google.maps.Marker({
+        position: latLng,
+        map:useMap
+    });
+}
+
+function fetchLocations(){
+    $.ajax({
+        method: 'GET',
+        url: '/api/geocode',
+        success: handleSuccess,
+        error: handleError
+    });
+}
+
+function handleSuccess(results){
+    var geocode = results;
+    console.log("latitude ", geocode.results[0].geometry.location.lat);
+    console.log("longitude ", geocode.results[0].geometry.location.lng);
+    console.log("address ", geocode.results[0].formatted_address);
+    lat = geocode.results[0].geometry.location.lat;
+    lng = geocode.results[0].geometry.location.lng;
+    address = geocode.results[0].formatted_address;
+    addMarker(lat,lng,map);
+}
+
+function handleError(err){
+    console.log(err);
+}
 
 function initMap(){
     // Map options
