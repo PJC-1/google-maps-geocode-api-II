@@ -2,44 +2,48 @@ console.log('Sanity check!');
 
 // Set map variable definition here to give the Maps object global scope
 var map;
+var lat;
+var lng;
 
 $(document).ready(function(){
-    $.ajax({
-        method: 'GET',
-        url: '/api/request',
-        success: handleSuccess,
-        error: handleError
-    });
 
-    function handleSuccess(results){
-      var locations = results;
-      console.log('success ajax', results);
-      for(var i=0;i<locations.length;i++){
-        var lat = locations[i].latitude;
-        var lng = locations[i].longitude;
-        addMarker2(lat,lng,map);
-      }
-
-    }
-
-    function handleError(err){
-      console.log('error from ajax ', err);
-    }
-
-    // addMarker2
-    function addMarker2(latitude,longitude,useMap){
-      var latLng = new google.maps.LatLng(latitude, longitude);
-      new google.maps.Marker({
-          position: latLng,
-          map:useMap
-      });
-    }
-
-
+    initMap();
+    fetchLocations();
 
 });
 
+function addMarker(latitude,longitude,useMap){
+    var latLng = new google.maps.LatLng(latitude, longitude);
+    new google.maps.Marker({
+        position: latLng,
+        map:useMap
+    });
+}
 
+function fetchLocations(){
+  $.ajax({
+      method: 'GET',
+      url: '/api/request',
+      success: handleSuccess,
+      error: handleError
+  });
+
+}
+
+
+function handleSuccess(results){
+    var locations = results;
+    console.log('success ajax', results);
+    for(var i=0;i<locations.length;i++){
+        lat = locations[i].latitude;
+        lng = locations[i].longitude;
+        addMarker(lat,lng,map);
+    }
+}
+
+function handleError(err){
+    console.log('error from ajax ', err);
+}
 
 function initMap(){
     // Map options
