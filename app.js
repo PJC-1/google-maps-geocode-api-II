@@ -47,16 +47,20 @@ let locations = [
 
 // root
 app.get('/', function(req, res){
-  res.sendFile('views/index.html', {root : __dirname});
+    res.sendFile('views/index.html', {root : __dirname});
 });
 
 app.get('/request', function(req, res){
-  res.sendFile('views/request.html', {root : __dirname});
+    res.sendFile('views/request.html', {root : __dirname});
 })
 
 app.get('/geocode', function(req, res){
-  res.sendFile('views/geocode.html', {root : __dirname});
+    res.sendFile('views/geocode.html', {root : __dirname});
 })
+
+app.get('/formData', function(req, res){
+    res.sendFile('views/formData.html', {root : __dirname});
+});
 
 
 ////////////////////////
@@ -65,39 +69,38 @@ app.get('/geocode', function(req, res){
 
 // get all locations
 app.get('/api/locations', function(req, res){
-  res.json(locations);
+    res.json(locations);
 });
 
 // server request to the database
 app.get('/api/request', function(req, res){
-  Location.find({}, function(err, results){
-    if(err){
-      console.log('error making request from the server...');
-    } else {
-      console.log(results);
-      res.json(results);
-    }
-  });
+    Location.find({}, function(err, results){
+        if(err){
+            console.log('error making request from the server...');
+        } else {
+            console.log(results);
+            res.json(results);
+        }
+    });
 });
 
 // server request to geocode API
-
 let apiKEY = process.env.YOUR_API_KEY;
 let baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
 let address = '222 Bush St, San Francisco, CA 94104, USA';
 let url = baseURL + address + "&key=" + apiKEY;
 
 app.get('/api/geocode', function(req, res){
-  request.get(url, function(error, response, body){
-    if(error){
-      res.send('error from req to geocode API', error);
-    } else {
-      var geocodeOutput = JSON.parse(body);
-      res.json(geocodeOutput);
-    }
-  });
+    request.get(url, function(error, response, body){
+        if(error){
+            res.send('error from req to geocode API', error);
+        } else {
+            var geocodeOutput = JSON.parse(body);
+            res.json(geocodeOutput);
+        }
+    });
 });
 
 app.listen(3000, function(){
-  console.log('You are now listening to the smooth sounds of port 3000...');
+    console.log('You are now listening to the smooth sounds of port 3000...');
 });
