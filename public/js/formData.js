@@ -6,7 +6,15 @@ var lng;
 
 $(document).ready(function(){
     initMap();
+
+    $('#location-form').on('submit', function(event){
+        event.preventDefault();
+        console.log($(this).serialize());
+    });
+
 });
+
+
 
 function addMarker(latitude,longitude,useMap){
     var latLng = new google.maps.LatLng(latitude, longitude);

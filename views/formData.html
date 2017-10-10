@@ -18,20 +18,19 @@
     <script src="/js/formData.js"></script>
 </head>
 <body>
-    <div class="container">
-      <h2 id="text-center">Enter Location: </h2>
-      <form id="location-form">
-        <input type="text" id="location-input" class="form-control form-control-lg">
-        <br>
-        <button type="submit" class="btn btn-primary btn-block">SUBMIT</button>
-      </form>
-      <div class="card-block" id="formatted-address"></div>
-      <div class="card-block" id="address-components"></div>
-      <div class="card-block" id="geometry"></div>
-      <div id='locationTarget'>
-      </div>
-      <div id="map"></div>
+  <div class="container">
+    <h2 id="text-center">Enter Location: </h2>
+    <form id="location-form">
+      <input type="text" name="location" id="location-input" class="form-control form-control-lg">
+      <br>
+      <input type="submit" name="singlebutton" class="btn btn-primary btn-block" value="SUBMIT">
+    </form>
+    <div class="card-block" id="formatted-address"></div>
+    <div class="card-block" id="address-components"></div>
+    <div class="card-block" id="geometry"></div>
+    <div id='locationTarget'>
     </div>
-
+    <div id="map"></div>
+  </div>
 </body>
 </html>
