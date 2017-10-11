@@ -101,6 +101,14 @@ app.get('/api/geocode', function(req, res){
     });
 });
 
+// server request to geocode API with form data
+app.post('/api/formData', function(req,res){
+    // logging the form field value from the ajax request object
+    console.log(req.body.location);
+    res.json(req.body.location);
+});
+
+
 app.listen(3000, function(){
     console.log('You are now listening to the smooth sounds of port 3000...');
 });

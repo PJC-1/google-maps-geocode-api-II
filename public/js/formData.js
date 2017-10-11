@@ -10,11 +10,24 @@ $(document).ready(function(){
     $('#location-form').on('submit', function(event){
         event.preventDefault();
         console.log($(this).serialize());
+        $.ajax({
+          method: 'POST',
+          url: '/api/formData',
+          data: $(this).serialize(),
+          success: handleSuccess,
+          error: handleError
+        });
     });
 
 });
 
+function handleSuccess(results){
+    console.log(results);
+}
 
+function handleError(err){
+    console.log(err);
+}
 
 function addMarker(latitude,longitude,useMap){
     var latLng = new google.maps.LatLng(latitude, longitude);
