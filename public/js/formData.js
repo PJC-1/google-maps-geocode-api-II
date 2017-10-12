@@ -21,20 +21,24 @@ $(document).ready(function(){
 
 });
 
-function handleSuccess(results){
-    console.log(results);
-}
-
-function handleError(err){
-    console.log(err);
-}
-
 function addMarker(latitude,longitude,useMap){
     var latLng = new google.maps.LatLng(latitude, longitude);
     new google.maps.Marker({
         position: latLng,
         map:useMap
     });
+}
+
+function handleSuccess(results){
+    console.log(results);
+    var geocode = results;
+    console.log("latitude ", geocode.results[0].geometry.location.lat);
+    console.log("longitude ", geocode.results[0].geometry.location.lng);
+    console.log("address ", geocode.results[0].formatted_address);
+}
+
+function handleError(err){
+    console.log(err);
 }
 
 function initMap(){
