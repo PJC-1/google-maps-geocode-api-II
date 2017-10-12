@@ -105,7 +105,17 @@ app.get('/api/geocode', function(req, res){
 app.post('/api/formData', function(req,res){
     // logging the form field value from the ajax request object
     console.log(req.body.location);
-    res.json(req.body.location);
+    let searchAddress = req.body.location;
+    let searchUrl = baseURL + searchAddress + "&key=" + apiKEY;
+    request.get(searchUrl, function(error, response, body){
+        if(error){
+            res.send('error from req to geocode API', error);
+        } else {
+            var geocodeOutput = JSON.parse(body);
+            res.json(geocodeOutput);
+        }
+    })
+
 });
 
 

@@ -27,7 +27,6 @@ function fetchLocations(){
       success: handleSuccess,
       error: handleError
   });
-
 }
 
 
