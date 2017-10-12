@@ -3,6 +3,7 @@ console.log("loaded geocode.js...");
 var map;
 var lat;
 var lng;
+var address;
 
 $(document).ready(function(){
 
@@ -35,7 +36,6 @@ function handleSuccess(results){
     console.log("address ", geocode.results[0].formatted_address);
     lat = geocode.results[0].geometry.location.lat;
     lng = geocode.results[0].geometry.location.lng;
-    address = geocode.results[0].formatted_address;
     addMarker(lat,lng,map);
 }
 
