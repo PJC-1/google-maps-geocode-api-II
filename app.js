@@ -112,6 +112,9 @@ app.post('/api/formData', function(req,res){
             res.send('error from req to geocode API', error);
         } else {
             var geocodeOutput = JSON.parse(body);
+            // from here you can create a new location object
+            // the save the new location to the db
+            // then send the saved entry to the client
             res.json(geocodeOutput);
         }
     })
