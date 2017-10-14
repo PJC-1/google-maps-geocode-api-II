@@ -112,32 +112,28 @@ app.post('/api/formData', function(req,res){
             res.send('error from req to geocode API', error);
         } else {
             var geocodeOutput = JSON.parse(body);
+
             var lat = geocodeOutput.results[0].geometry.location.lat;
             var lng = geocodeOutput.results[0].geometry.location.lng;
             var formattedAddress = geocodeOutput.results[0].formatted_address;
-            console.log(lat);
-            console.log(lng);
-            console.log(address);
+
             var newLocation = new Location({
                 latitude  : lat,
                 longitude : lng,
                 address   : formattedAddress
             });
+            
             newLocation.save(function(err, result){
                 if(err){
                     console.log("issue saving the location...", err);
                     return;
                 } else {
                     console.log("new location is saved to the db...", result);
+                    res.json(result);
                 }
             });
-            // from here you can create a new location object
-            // the save the new location to the db
-            // then send the saved entry to the client
-            res.json(geocodeOutput);
         }
     })
-
 });
 
 

@@ -33,11 +33,10 @@ function addMarker(latitude,longitude,useMap){
 function handleSuccess(results){
     console.log(results);
     var geocode = results;
-    console.log("latitude ", geocode.results[0].geometry.location.lat);
-    console.log("longitude ", geocode.results[0].geometry.location.lng);
-    console.log("address ", geocode.results[0].formatted_address);
-    lat = geocode.results[0].geometry.location.lat;
-    lng = geocode.results[0].geometry.location.lng;
+    lat = geocode.latitude;
+    lng = geocode.longitude;
+    console.log("latitude ", lat);
+    console.log("longitude ", lng);
     addMarker(lat,lng,map);
 }
 
