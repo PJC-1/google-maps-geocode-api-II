@@ -33,6 +33,9 @@ function fetchLocations(){
 function handleSuccess(results){
     var locations = results;
     console.log('success ajax', results);
+    // create some html output that lists all the locations
+    // so that the user can click on single location and be
+    // redirected to localhost:3000/locations/:id
     for(var i=0;i<locations.length;i++){
         lat = locations[i].latitude;
         lng = locations[i].longitude;
