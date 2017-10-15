@@ -36,11 +36,31 @@ function handleSuccess(results){
     // create some html output that lists all the locations
     // so that the user can click on single location and be
     // redirected to localhost:3000/locations/:id
+    var output = `
+        <table>
+            <tr>
+                <th>Address</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+            </tr>
+    `;
     for(var i=0;i<locations.length;i++){
         lat = locations[i].latitude;
         lng = locations[i].longitude;
+        addy = locations[i].address;
+        output += `
+            <tr>
+                <td>${addy}</td>
+                <td>${lat}</td>
+                <td>${lng}</td>
+            </tr>
+        `;
         addMarker(lat,lng,map);
     }
+    output += `
+      </table>
+    `;
+    document.getElementById("htmlTarget").innerHTML = output;
 }
 
 function handleError(err){
