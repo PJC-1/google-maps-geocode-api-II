@@ -1,14 +1,19 @@
 console.log('Sanity check!');
 
 // Set map variable definition here to give the Maps object global scope
+var id;
 var map;
 var lat;
 var lng;
+var address;
+
 
 $(document).ready(function(){
 
     initMap();
     fetchLocations();
+
+    // create an event listener to listen for click on table row.
 
 });
 
@@ -44,17 +49,17 @@ function handleSuccess(results){
     `;
     // loop through server response
     for(var i=0;i<locations.length;i++){
-        console.log(locations[i]);
         // think about using the _id value to add to the location in the html output
         // that way you can create a click event to listen for and have the data-id
         // available to send along with the request to the server.
+        id = locations[i]._id;
         lat = locations[i].latitude;
         lng = locations[i].longitude;
-        addy = locations[i].address;
+        address = locations[i].address;
         // add to the html ouput, as table row
         output += `
-            <tr>
-                <td>${addy}</td>
+            <tr class="locationTR" data-id="${id}">
+                <td>${address}</td>
                 <td>${lat}</td>
                 <td>${lng}</td>
             </tr>
