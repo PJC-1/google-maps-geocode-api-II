@@ -54,6 +54,9 @@ app.get('/request', function(req, res){
     res.sendFile('views/request.html', {root : __dirname});
 })
 
+// create a new route for users to view a single location.
+
+
 app.get('/geocode', function(req, res){
     res.sendFile('views/geocode.html', {root : __dirname});
 })
@@ -122,7 +125,7 @@ app.post('/api/formData', function(req,res){
                 longitude : lng,
                 address   : formattedAddress
             });
-            
+
             newLocation.save(function(err, result){
                 if(err){
                     console.log("issue saving the location...", err);

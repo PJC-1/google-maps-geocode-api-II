@@ -31,11 +31,9 @@ function fetchLocations(){
 
 
 function handleSuccess(results){
+    // server reponse
     var locations = results;
-    console.log('success ajax', results);
-    // create some html output that lists all the locations
-    // so that the user can click on single location and be
-    // redirected to localhost:3000/locations/:id
+    // html output
     var output = `
         <table>
             <tr>
@@ -44,10 +42,16 @@ function handleSuccess(results){
                 <th>Longitude</th>
             </tr>
     `;
+    // loop through server response
     for(var i=0;i<locations.length;i++){
+        console.log(locations[i]);
+        // think about using the _id value to add to the location in the html output
+        // that way you can create a click event to listen for and have the data-id
+        // available to send along with the request to the server.
         lat = locations[i].latitude;
         lng = locations[i].longitude;
         addy = locations[i].address;
+        // add to the html ouput, as table row
         output += `
             <tr>
                 <td>${addy}</td>
@@ -55,11 +59,14 @@ function handleSuccess(results){
                 <td>${lng}</td>
             </tr>
         `;
+        // add marker to the map
         addMarker(lat,lng,map);
     }
+    // end html output, closing table tag
     output += `
-      </table>
+        </table>
     `;
+    // displaying the ouput in the html view
     document.getElementById("htmlTarget").innerHTML = output;
 }
 
