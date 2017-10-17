@@ -13,8 +13,6 @@ $(document).ready(function(){
     initMap();
     fetchLocations();
 
-    // create an event listener to listen for click on table row.
-
 });
 
 function addMarker(latitude,longitude,useMap){
@@ -58,8 +56,8 @@ function handleSuccess(results){
         address = locations[i].address;
         // add to the html ouput, as table row
         output += `
-            <tr class="locationTR" data-id="${id}">
-                <td>${address}</td>
+            <tr>
+                <td><span data-id="${id}" onclick="redirectTR()" id="locationTR">${address}</span></td>
                 <td>${lat}</td>
                 <td>${lng}</td>
             </tr>
@@ -87,4 +85,9 @@ function initMap(){
     }
     // New map
     map = new google.maps.Map(document.getElementById('map'), options);
+}
+
+
+function redirectTR(){
+  console.log("This could be a workaround...");
 }
