@@ -90,4 +90,5 @@ function initMap(){
 
 function redirectTR(){
   console.log("This could be a workaround...");
+  // send ajax request to the server
 }
