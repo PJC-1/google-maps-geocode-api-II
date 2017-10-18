@@ -13,5 +13,7 @@ db.once('open', function(){
   console.log('connected to mongodb');
 });
 
+// Check this because this might be why it doesn't work
 // Bring in Models
-let Location = module.exports = require('./location');
+module.exports.Location = require('./location');
+module.exports.User = require('./user');

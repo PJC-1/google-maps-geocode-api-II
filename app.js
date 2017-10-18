@@ -4,6 +4,12 @@ const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const request = require('request');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const session = require('express-session');
+const bcrypt = require('bcryptjs');
+const passport = require('passport');
+
 // DOTENV
 dotenv.config();
 
@@ -13,12 +19,45 @@ const app = express();
 // serve static files in public
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Express Session Middleware
+app.use(session({
+ secret: 'secret',
+ resave: true,
+ saveUninitialized: true
+}));
+
+// Express Messages Middleware
+app.use(require('connect-flash')());
+app.use(function(req, res, next){
+   res.locals.messages = require('express-messages')(req, res);
+   next();
+});
+
+// Express Validator Middleware
+app.use(expressValidator({
+ errorFormatter: function(param, msg, value) {
+     var namespace = param.split('.')
+     , root    = namespace.shift()
+     , formParam = root;
+
+   while(namespace.length) {
+     formParam += '[' + namespace.shift() + ']';
+   }
+   return {
+     param : formParam,
+     msg   : msg,
+     value : value
+   };
+ }
+}));
+
 // body parser config to accept our datatypes
 app.use(bodyParser.urlencoded({ extended : true }));
 
 // db
 let database = require('./models');
 let Location = require('./models/location');
+let User = require('./models/user')
 
 let locations = [
   {
@@ -54,9 +93,6 @@ app.get('/request', function(req, res){
     res.sendFile('views/request.html', {root : __dirname});
 })
 
-// create a new route for users to view a single location.
-
-
 app.get('/geocode', function(req, res){
     res.sendFile('views/geocode.html', {root : __dirname});
 })
@@ -65,6 +101,49 @@ app.get('/formData', function(req, res){
     res.sendFile('views/formData.html', {root : __dirname});
 });
 
+app.get('/users/register', function(req, res){
+    res.sendFile('views/register.html', {root : __dirname});
+});
+
+app.get('/users/login', function(req, res){
+  res.sendFile('views/login.html', {root : __dirname});
+});
+
+app.post('/users/register', function(req, res){
+  console.log('testing post to /users/register');
+
+  const name = req.body.name;
+  const email = req.body.email;
+  const username = req.body.username;
+  const password = req.body.password;
+  const password2 = req.body.password2;
+
+  let newUser = new User({
+    name:name,
+    email:email,
+    username:username,
+    password:password
+  });
+
+  bcrypt.genSalt(10, function(err, salt){
+      bcrypt.hash(newUser.password, salt, function(err, hash){
+          if(err){
+              console.log(err);
+          } else {
+              newUser.password = hash;
+              newUser.save(function(err){
+                  if(err){
+                      console.log(err);
+                      return;
+                  } else {
+                      console.log("user is now logged in...");
+                      res.redirect('/users/login');
+                  }
+              });
+          }
+      });
+  });
+});
 
 ////////////////////////
 // JSON API ENDPOINTS //
@@ -138,7 +217,6 @@ app.post('/api/formData', function(req,res){
         }
     })
 });
-
 
 app.listen(3000, function(){
     console.log('You are now listening to the smooth sounds of port 3000...');

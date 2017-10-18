@@ -91,4 +91,10 @@ function initMap(){
 function redirectTR(){
   console.log("This could be a workaround...");
   // send ajax request to the server
+  // $.ajax({
+  //   method: "GET",
+  //   url: "/api/singleDestination",
+  //   data: $(this).serialize,
+  //   success:
+  // });
 }
