@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
+const config = require('../config/database');
 // Connect to mongodb
-mongoose.connect('mongodb://localhost/googleAPI');
+mongoose.connect(config.database);
 let db = mongoose.connection;
 
 // Check for DB errors

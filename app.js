@@ -51,6 +51,8 @@ app.use(expressValidator({
  }
 }));
 
+
+
 // body parser config to accept our datatypes
 app.use(bodyParser.urlencoded({ extended : true }));
 
@@ -79,6 +81,17 @@ let locations = [
     address:'2 Romolo Pl, San Francisco, CA 94133, USA'
   }
 ];
+
+//  Passport Config
+require('./config/passport')(passport);
+// Passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('*', function(req, res, next){
+  res.locals.user = req.user || null;
+  next();
+});
 
 ////////////////////
 // HTML ENDPOINTS //
@@ -109,6 +122,15 @@ app.get('/users/login', function(req, res){
   res.sendFile('views/login.html', {root : __dirname});
 });
 
+// Login Process
+app.post('/users/login', function(req, res, next){
+  passport.authenticate('local', {
+    successRedirect:'/',
+    failureRedirect:'/users/login',
+    failureFlash: true
+  })(req, res, next);
+});
+
 app.post('/users/register', function(req, res){
   console.log('testing post to /users/register');
 
@@ -136,7 +158,7 @@ app.post('/users/register', function(req, res){
                       console.log(err);
                       return;
                   } else {
-                      console.log("user is now logged in...");
+                      console.log("user has been created...");
                       res.redirect('/users/login');
                   }
               });
