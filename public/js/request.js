@@ -12,7 +12,10 @@ $(document).ready(function(){
 
     initMap();
     fetchLocations();
-
+    $("#htmlTarget").on("click", "#locationTR", function(e){
+      e.preventDefault;
+      console.log('clicking a location...');
+    });
 });
 
 function addMarker(latitude,longitude,useMap){
@@ -57,7 +60,7 @@ function handleSuccess(results){
         // add to the html ouput, as table row
         output += `
             <tr>
-                <td><span data-id="${id}" onclick="redirectTR()" id="locationTR">${address}</span></td>
+                <td><span data-id="${id}" id="locationTR">${address}</span></td>
                 <td>${lat}</td>
                 <td>${lng}</td>
             </tr>
@@ -93,8 +96,12 @@ function redirectTR(){
   // send ajax request to the server
   // $.ajax({
   //   method: "GET",
-  //   url: "/api/singleDestination",
-  //   data: $(this).serialize,
-  //   success:
+  //   url: "/api/singleDestination"+$(this).attr('data-id'),
+  //   success: function(result){
+  //     console.log(result);
+  //   },
+  //   error: function(err){
+  //     console.log(err);
+  //   }
   // });
 }
