@@ -15,3 +15,4 @@
 https://developers.google.com/maps/documentation/javascript/examples/map-sync
 - I was dealing with an issue where my form was wired correctly, but when I attempted to console log $(this).serialize() it would log an empty value, this was because you need to provide the name attribute in the html (i.e. name="location"). This is brought up in this stackoverflow
 https://stackoverflow.com/questions/13168484/jquerys-serialize-doesnt-do-anything
+- When dynamically creating html output creating the data-id, I had to change this attribute name to data-location-id, and then use jquery to access the `_id` by doing something like `var id = $(this).closest('.location').data('location-id');`

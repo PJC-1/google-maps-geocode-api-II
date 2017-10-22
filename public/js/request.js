@@ -12,9 +12,20 @@ $(document).ready(function(){
 
     initMap();
     fetchLocations();
-    $("#htmlTarget").on("click", "#locationTR", function(e){
-      e.preventDefault;
-      console.log('clicking a location...');
+    $("#htmlTarget").on("click", ".location", function(e){
+      var id = $(this).closest('.location').data('location-id');
+      console.log(id);
+
+      // $.ajax({
+      //   method: 'GET',
+      //   url: '/api/locations/' + id,
+      //   success: function(result){
+      //     console.log(result);
+      //   },
+      //   error: function(error){
+      //     console.log(error);
+      //   }
+      // });
     });
 });
 
@@ -59,8 +70,8 @@ function handleSuccess(results){
         address = locations[i].address;
         // add to the html ouput, as table row
         output += `
-            <tr>
-                <td><span data-id="${id}" id="locationTR">${address}</span></td>
+            <tr data-location-id="${id}" class="location" >
+                <td><span id="locationTR">${address}</span></td>
                 <td>${lat}</td>
                 <td>${lng}</td>
             </tr>
@@ -88,20 +99,4 @@ function initMap(){
     }
     // New map
     map = new google.maps.Map(document.getElementById('map'), options);
-}
-
-
-function redirectTR(){
-  console.log("This could be a workaround...");
-  // send ajax request to the server
-  // $.ajax({
-  //   method: "GET",
-  //   url: "/api/singleDestination"+$(this).attr('data-id'),
-  //   success: function(result){
-  //     console.log(result);
-  //   },
-  //   error: function(err){
-  //     console.log(err);
-  //   }
-  // });
 }

@@ -188,6 +188,11 @@ app.get('/api/request', function(req, res){
     });
 });
 
+app.get('/api/locations/:id', function(req, res){
+  // console.log(req);
+  // res.send(req);
+});
+
 // server request to geocode API
 let apiKEY = process.env.YOUR_API_KEY;
 let baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
