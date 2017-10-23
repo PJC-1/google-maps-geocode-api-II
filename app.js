@@ -122,6 +122,10 @@ app.get('/users/login', function(req, res){
   res.sendFile('views/login.html', {root : __dirname});
 });
 
+app.get('/locations/:id', function(req, res){
+  res.sendFile('views/location.html', {root : __dirname});
+});
+
 // Login Process
 app.post('/users/login', function(req, res, next){
   passport.authenticate('local', {
@@ -186,11 +190,6 @@ app.get('/api/request', function(req, res){
             res.json(results);
         }
     });
-});
-
-app.get('/api/locations/:id', function(req, res){
-  // console.log(req);
-  // res.send(req);
 });
 
 // server request to geocode API

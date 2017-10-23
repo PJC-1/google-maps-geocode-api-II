@@ -15,17 +15,7 @@ $(document).ready(function(){
     $("#htmlTarget").on("click", ".location", function(e){
       var id = $(this).closest('.location').data('location-id');
       console.log(id);
-
-      // $.ajax({
-      //   method: 'GET',
-      //   url: '/api/locations/' + id,
-      //   success: function(result){
-      //     console.log(result);
-      //   },
-      //   error: function(error){
-      //     console.log(error);
-      //   }
-      // });
+      window.location.href = '/locations/' + id;
     });
 });
 
@@ -61,9 +51,6 @@ function handleSuccess(results){
     `;
     // loop through server response
     for(var i=0;i<locations.length;i++){
-        // think about using the _id value to add to the location in the html output
-        // that way you can create a click event to listen for and have the data-id
-        // available to send along with the request to the server.
         id = locations[i]._id;
         lat = locations[i].latitude;
         lng = locations[i].longitude;
