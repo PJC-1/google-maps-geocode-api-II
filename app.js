@@ -180,6 +180,11 @@ app.get('/api/locations', function(req, res){
     res.json(locations);
 });
 
+app.get('/api/locations/:id', function(req, res){
+  console.log(req.params.id);
+  res.send(req.params.id);
+});
+
 // server request to the database
 app.get('/api/request', function(req, res){
     Location.find({}, function(err, results){
