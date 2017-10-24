@@ -35,6 +35,10 @@ function addMarker(latitude,longitude,useMap){
 
 function handleSuccess(result){
   console.log(result);
+  var address = result.address;
+  var lat = result.latitude;
+  var lng = result.longitude;
+  addMarker(lat,lng,map);
     // // server reponse
     // var locations = results;
     // // html output

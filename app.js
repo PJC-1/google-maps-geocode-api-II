@@ -182,7 +182,14 @@ app.get('/api/locations', function(req, res){
 
 app.get('/api/locations/:id', function(req, res){
   console.log(req.params.id);
-  res.send(req.params.id);
+  Location.findById({_id:req.params.id}, function(err, result){
+      if(err){
+        console.log("error making request to db from the server...");
+      } else {
+        console.log(result);
+        res.json(result);
+      }
+  });
 });
 
 // server request to the database
