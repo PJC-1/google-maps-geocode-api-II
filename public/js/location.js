@@ -39,43 +39,11 @@ function handleSuccess(result){
   var lat = result.latitude;
   var lng = result.longitude;
   addMarker(lat,lng,map);
-    // // server reponse
-    // var locations = results;
-    // // html output
-    // var output = `
-    //     <table>
-    //         <tr>
-    //             <th>Address</th>
-    //             <th>Latitude</th>
-    //             <th>Longitude</th>
-    //         </tr>
-    // `;
-    // // loop through server response
-    // for(var i=0;i<locations.length;i++){
-    //     // think about using the _id value to add to the location in the html output
-    //     // that way you can create a click event to listen for and have the data-id
-    //     // available to send along with the request to the server.
-    //     id = locations[i]._id;
-    //     lat = locations[i].latitude;
-    //     lng = locations[i].longitude;
-    //     address = locations[i].address;
-    //     // add to the html ouput, as table row
-    //     output += `
-    //         <tr data-location-id="${id}" class="location" >
-    //             <td><span id="locationTR">${address}</span></td>
-    //             <td>${lat}</td>
-    //             <td>${lng}</td>
-    //         </tr>
-    //     `;
-    //     // add marker to the map
-    //     addMarker(lat,lng,map);
-    // }
-    // // end html output, closing table tag
-    // output += `
-    //     </table>
-    // `;
-    // // displaying the ouput in the html view
-    // document.getElementById("htmlTarget").innerHTML = output;
+  var output = `
+    <h3>Address: ${address}</h3>
+  `;
+  document.getElementById("formatted-address").innerHTML = output;
+
 }
 
 function handleError(err){
