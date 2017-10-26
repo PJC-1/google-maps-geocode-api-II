@@ -25,7 +25,9 @@ $(document).ready(function(){
     });
 
     $("#locationTarget").on("click", ".delete-location", function(event){
-      console.log("test clicking delete button...");
+      var locationId = $(this).closest(".location").attr("data-id");
+      console.log(locationId);
+
     });
 });
 
@@ -47,7 +49,7 @@ function handleSuccess(result){
   var output = `
     <h3>Address: ${address}</h3>
     <br>
-    <button data-id="${id}" class="delete-location">Delete</button>
+    <button data-id="${id}" class="delete-location location">Delete</button>
   `;
   document.getElementById("locationTarget").innerHTML = output;
 
