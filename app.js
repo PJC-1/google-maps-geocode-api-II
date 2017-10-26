@@ -192,6 +192,16 @@ app.get('/api/locations/:id', function(req, res){
   });
 });
 
+app.delete('/api/locations/:id', function(req, res){
+  Location.findOneAndRemove(req.params.id, function(err, location){
+    if(err){
+      console.log(err);
+    } else {
+      res.json(location);
+    }
+  });
+});
+
 // server request to the database
 app.get('/api/request', function(req, res){
     Location.find({}, function(err, results){

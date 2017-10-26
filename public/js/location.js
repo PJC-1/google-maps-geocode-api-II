@@ -27,7 +27,13 @@ $(document).ready(function(){
     $("#locationTarget").on("click", ".delete-location", function(event){
       var locationId = $(this).closest(".location").attr("data-id");
       console.log(locationId);
-
+      $.ajax({
+        method: "DELETE",
+        url: "/api/locations/" + id,
+        data: id,
+        success: deleteSuccess,
+        error: handleError
+      });
     });
 });
 
@@ -37,6 +43,10 @@ function addMarker(latitude,longitude,useMap){
         position: latLng,
         map:useMap
     });
+}
+
+function deleteSuccess(response){
+  window.location.href = '/request';
 }
 
 function handleSuccess(result){
