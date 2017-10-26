@@ -23,6 +23,10 @@ $(document).ready(function(){
       success: handleSuccess,
       error: handleError
     });
+
+    $("#locationTarget").on("click", ".delete-location", function(event){
+      console.log("test clicking delete button...");
+    });
 });
 
 function addMarker(latitude,longitude,useMap){
@@ -35,14 +39,17 @@ function addMarker(latitude,longitude,useMap){
 
 function handleSuccess(result){
   console.log(result);
+  var id = result._id;
   var address = result.address;
   var lat = result.latitude;
   var lng = result.longitude;
   addMarker(lat,lng,map);
   var output = `
     <h3>Address: ${address}</h3>
+    <br>
+    <button data-id="${id}" class="delete-location">Delete</button>
   `;
-  document.getElementById("formatted-address").innerHTML = output;
+  document.getElementById("locationTarget").innerHTML = output;
 
 }
 
