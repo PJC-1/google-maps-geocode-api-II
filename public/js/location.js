@@ -35,6 +35,11 @@ $(document).ready(function(){
         error: handleError
       });
     });
+
+    $("#locationTarget").on("click", ".edit-location", function(event){
+      var locationId = $(this).closest(".location").attr("data-id");
+      console.log(locationId);
+    });
 });
 
 function addMarker(latitude,longitude,useMap){
@@ -60,6 +65,7 @@ function handleSuccess(result){
     <h3>Address: ${address}</h3>
     <br>
     <button data-id="${id}" class="delete-location location">Delete</button>
+    <button data-id="${id}" class="edit-location location">Edit</button>
   `;
   document.getElementById("locationTarget").innerHTML = output;
 
