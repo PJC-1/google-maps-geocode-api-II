@@ -126,6 +126,10 @@ app.get('/locations/:id', function(req, res){
   res.sendFile('views/location.html', {root : __dirname});
 });
 
+app.get('/locations/:id/edit', function(req, res){
+  res.sendFile('views/editLocation.html', {root : __dirname});
+});
+
 // Login Process
 app.post('/users/login', function(req, res, next){
   passport.authenticate('local', {

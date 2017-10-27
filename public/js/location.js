@@ -39,6 +39,7 @@ $(document).ready(function(){
     $("#locationTarget").on("click", ".edit-location", function(event){
       var locationId = $(this).closest(".location").attr("data-id");
       console.log(locationId);
+      window.location.href = '/locations/' + locationId + '/edit'
     });
 });
 
