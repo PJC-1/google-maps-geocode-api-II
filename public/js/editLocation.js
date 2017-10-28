@@ -7,4 +7,6 @@ $(document).ready(function(){
     var url = '/api/locations/' + id;
 
     console.log(url);
+    // use something like document.getElementById('location-input').value = ${formattedAddress};
+    // so that the form is populated with the location's address
 });
