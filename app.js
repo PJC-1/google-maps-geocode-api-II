@@ -197,7 +197,7 @@ app.get('/api/locations/:id', function(req, res){
 });
 
 app.delete('/api/locations/:id', function(req, res){
-  Location.findOneAndRemove(req.params.id, function(err, location){
+  Location.findOneAndRemove({_id:req.params.id}, function(err, location){
     if(err){
       console.log(err);
     } else {
