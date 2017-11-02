@@ -23,6 +23,14 @@ $(document).ready(function(){
 
 function onSuccess(result){
   console.log(result);
+  var output = `
+    <form id="location-form">
+      <input type="text" name="location" id="location-input" value="${result.address}" class="form-control form-control-lg">
+      <br>
+      <input type="submit" name="singlebutton" class="btn btn-primary btn-block" value="SUBMIT">
+    </form>
+  `;
+  $("#formTarget").append(output);
 }
 
 function onError(err){
