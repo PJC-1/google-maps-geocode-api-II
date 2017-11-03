@@ -1,6 +1,8 @@
 console.log("testing edit location...");
 
 $(document).ready(function(){
+    initMap();
+
     var windowPath = window.location.pathname;
     var windowPathSplit = windowPath.split('/');
     var id = windowPathSplit[2];
@@ -16,9 +18,8 @@ $(document).ready(function(){
       error : onError
     });
 
-    // use something like document.getElementById('location-input').value = ${formattedAddress};
-    // so that the form is populated with the location's address
-    // document.getElementById('location-input').value =
+    // make a Get request to Geocode API on 'submit', then
+    // on success make two buttons: 1. save changes 2. cancel changes
 });
 
 function onSuccess(result){
@@ -31,8 +32,29 @@ function onSuccess(result){
     </form>
   `;
   $("#formTarget").append(output);
+  var lat = result.latitude;
+  var lng = result.longitude;
+  addMarker(lat,lng,map);
 }
 
 function onError(err){
   console.log(err);
+}
+
+function addMarker(latitude,longitude,useMap){
+    var latLng = new google.maps.LatLng(latitude, longitude);
+    new google.maps.Marker({
+        position: latLng,
+        map:useMap
+    });
+}
+
+function initMap(){
+    // Map options
+    var options = {
+        zoom : 12,
+        center : {lat:37.7749,lng:-122.431297}
+    }
+    // New map
+    map = new google.maps.Map(document.getElementById('map'), options);
 }
