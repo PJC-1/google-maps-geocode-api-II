@@ -28,13 +28,18 @@ function onSuccess(result){
     <form id="location-form">
       <input type="text" name="location" id="location-input" value="${result.address}" class="form-control form-control-lg">
       <br>
-      <input type="submit" name="singlebutton" class="btn btn-primary btn-block" value="SUBMIT">
     </form>
+    <button onclick="submitButton()" class="btn btn-primary btn-block">submit</button>
   `;
   $("#formTarget").append(output);
   var lat = result.latitude;
   var lng = result.longitude;
   addMarker(lat,lng,map);
+}
+
+function submitButton(){
+  console.log("testing button");
+  console.log($("form").serialize());
 }
 
 function onError(err){
