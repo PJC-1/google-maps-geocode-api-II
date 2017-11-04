@@ -29,7 +29,7 @@ function onSuccess(result){
       <input type="text" name="location" id="location-input" value="${result.address}" class="form-control form-control-lg">
       <br>
     </form>
-    <button onclick="submitButton()" class="btn btn-primary btn-block">submit</button>
+    <button onclick="submitButton()" class="btn btn-primary btn-group btn-lg">submit</button>
   `;
   $("#formTarget").append(output);
   var lat = result.latitude;
@@ -50,7 +50,29 @@ function submitButton(){
 }
 
 function newReqSuccess(result){
-  console.log(result);
+  console.log(result.results[0].geometry.location.lat);
+  console.log(result.results[0].geometry.location.lng);
+  console.log(result.results[0].formatted_address);
+  $("#formTarget").empty();
+  var output = `
+    <form id="location-form">
+      <input type="text" name="location" id="location-input" value="${result.results[0].formatted_address}" class="form-control form-control-lg">
+      <br>
+    </form>
+    <button onclick="cancelButton()" class="btn btn-danger btn-group btn-lg">cancel</button><button onclick="saveButton()" class="btn btn-success btn-group btn-lg">save</button>
+  `;
+  $("#formTarget").append(output);
+  var lat = result.results[0].geometry.location.lat;
+  var lng = result.results[0].geometry.location.lng;
+  addMarker(lat,lng,map);
+}
+
+function cancelButton(){
+  console.log("testing cancel button");
+}
+
+function saveButton(){
+  console.log("testing save button");
 }
 
 function onError(err){
