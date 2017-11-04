@@ -212,12 +212,24 @@ app.put('/api/locations/:id', function(req, res){
   console.log(req.body.longitude);
 
   // 1. Find the Location, use the mongoose method findById with req.params.id
-
-  // 2. If the Location if found in the DB, then set the values one by one to the new values from the form.
-
-  // 3. Use the .save() method to save the updated Location and use res.json to send the updated Location back to the client.
-
-
+  Location.findById({_id:req.params.id}, function(err, result){
+    if(err){
+      console.log(err);
+    } else {
+      // 2. If the Location if found in the DB, then set the values one by one to the new values from the form.
+      result.latitude = req.body.latitude;
+      result.longitude = req.body.longitude;
+      result.address = req.body.address;
+      // 3. Use the .save() method to save the updated Location and use res.json to send the updated Location back to the client.
+      result.save(function(err, updatedItem){
+        if(err){
+          console.log(err);
+        } else {
+          res.json(updatedItem);
+        }
+      });
+    }
+  });
 });
 
 // server request to the database
