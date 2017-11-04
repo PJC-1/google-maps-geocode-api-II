@@ -1,14 +1,17 @@
 console.log("testing edit location...");
 
+var windowPath;
+var windowPathSplit;
+var id;
+var url;
+
 $(document).ready(function(){
     initMap();
 
-    var windowPath = window.location.pathname;
-    var windowPathSplit = windowPath.split('/');
-    var id = windowPathSplit[2];
-    var url = '/api/locations/' + id;
-
-    console.log(url);
+    windowPath = window.location.pathname;
+    windowPathSplit = windowPath.split('/');
+    id = windowPathSplit[2];
+    url = '/api/locations/' + id;
 
     // make a request to fetch the location
     $.ajax({
@@ -18,12 +21,9 @@ $(document).ready(function(){
       error : onError
     });
 
-    // make a Get request to Geocode API on 'submit', then
-    // on success make two buttons: 1. save changes 2. cancel changes
 });
 
 function onSuccess(result){
-  console.log(result);
   var output = `
     <form id="location-form">
       <input type="text" name="location" id="location-input" value="${result.address}" class="form-control form-control-lg">
@@ -38,8 +38,6 @@ function onSuccess(result){
 }
 
 function submitButton(){
-  console.log("testing button");
-  console.log($("form").serialize());
   $.ajax({
     method:"POST",
     url: '/api/newRequest',
@@ -75,6 +73,17 @@ function cancelButton(){
 
 function saveButton(){
   console.log($("form").serialize());
+  $.ajax({
+    method: "PUT",
+    url: url,
+    data: $("form").serialize(),
+    success: saveSuccess,
+    error: onError
+  })
+}
+
+function saveSuccess(result){
+  console.log(result);
 }
 
 function onError(err){

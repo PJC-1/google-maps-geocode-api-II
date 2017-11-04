@@ -206,6 +206,13 @@ app.delete('/api/locations/:id', function(req, res){
   });
 });
 
+app.put('/api/locations/:id', function(req, res){
+  console.log(req.body.address);
+  console.log(req.body.latitude);
+  console.log(req.body.longitude);
+  res.send("testing put route...");
+});
+
 // server request to the database
 app.get('/api/request', function(req, res){
     Location.find({}, function(err, results){
