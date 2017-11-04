@@ -40,6 +40,17 @@ function onSuccess(result){
 function submitButton(){
   console.log("testing button");
   console.log($("form").serialize());
+  $.ajax({
+    method:"POST",
+    url: '/api/newRequest',
+    data: $("form").serialize(),
+    success: newReqSuccess,
+    error: onError
+  });
+}
+
+function newReqSuccess(result){
+  console.log(result);
 }
 
 function onError(err){
