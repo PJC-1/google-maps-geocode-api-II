@@ -59,7 +59,8 @@ function newReqSuccess(result){
       <input type="hidden" name="longitude" id="location-input" value="${result.results[0].geometry.location.lng}" class="form-control form-control-lg">
       <br>
     </form>
-    <button onclick="cancelButton()" class="btn btn-danger btn-group btn-lg">cancel</button><button onclick="saveButton()" class="btn btn-success btn-group btn-lg">save</button>
+    <button onclick="cancelButton()" class="btn btn-danger btn-lg">cancel</button>
+    <button onclick="saveButton()" class="btn btn-success btn-lg">save</button>
   `;
   $("#formTarget").append(output);
   var lat = result.results[0].geometry.location.lat;
@@ -69,6 +70,7 @@ function newReqSuccess(result){
 
 function cancelButton(){
   console.log("testing cancel button");
+  window.location.href = '/locations/' + id;
 }
 
 function saveButton(){
@@ -84,6 +86,7 @@ function saveButton(){
 
 function saveSuccess(result){
   console.log(result);
+  window.location.href = '/locations/' + id;
 }
 
 function onError(err){

@@ -220,11 +220,12 @@ app.put('/api/locations/:id', function(req, res){
       result.latitude = req.body.latitude;
       result.longitude = req.body.longitude;
       result.address = req.body.address;
-      // 3. Use the .save() method to save the updated Location and use res.json to send the updated Location back to the client.
+      // 3. Use the .save() method to save the updated Location
       result.save(function(err, updatedItem){
         if(err){
           console.log(err);
         } else {
+          // 4. Use res.json to send the updated Location back to the client.
           res.json(updatedItem);
         }
       });

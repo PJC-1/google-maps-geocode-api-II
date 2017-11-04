@@ -65,8 +65,8 @@ function handleSuccess(result){
   var output = `
     <h3>Address: ${address}</h3>
     <br>
-    <button data-id="${id}" class="delete-location location">Delete</button>
-    <button data-id="${id}" class="edit-location location">Edit</button>
+    <button data-id="${id}" class="delete-location btn btn-lg btn-danger location">Delete</button>
+    <button data-id="${id}" class="edit-location btn btn-lg btn-primary location">Edit</button>
   `;
   document.getElementById("locationTarget").innerHTML = output;
 
