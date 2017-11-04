@@ -237,11 +237,18 @@ app.get('/api/geocode', function(req, res){
 
 
 app.post('/api/newRequest', function(req, res){
-  let reqAddress = req.body.location;
-  console.log(reqAddress);
-  let reqUrl = baseURL + reqAddress + "&key=" + apiKEY;
-  console.log(reqUrl);
-  res.send(reqUrl);
+    let reqAddress = req.body.location;
+    console.log(reqAddress);
+    let reqUrl = baseURL + reqAddress + "&key=" + apiKEY;
+    console.log(reqUrl);
+    request.get(reqUrl, function(error, response, body){
+        if(error){
+          res.send('error from req to geocode API', error);
+        } else {
+          var geocodeOutput = JSON.parse(body);
+          res.json(geocodeOutput);
+        }
+    });
 });
 
 // server request to geocode API with form data
