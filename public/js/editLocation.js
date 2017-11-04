@@ -56,7 +56,9 @@ function newReqSuccess(result){
   $("#formTarget").empty();
   var output = `
     <form id="location-form">
-      <input type="text" name="location" id="location-input" value="${result.results[0].formatted_address}" class="form-control form-control-lg">
+      <input type="text" name="address" id="address-input" value="${result.results[0].formatted_address}" class="form-control form-control-lg">
+      <input type="hidden" name="latitude" id="latitude-input" value="${result.results[0].geometry.location.lat}" class="form-control form-control-lg">
+      <input type="hidden" name="longitude" id="location-input" value="${result.results[0].geometry.location.lng}" class="form-control form-control-lg">
       <br>
     </form>
     <button onclick="cancelButton()" class="btn btn-danger btn-group btn-lg">cancel</button><button onclick="saveButton()" class="btn btn-success btn-group btn-lg">save</button>
@@ -72,7 +74,7 @@ function cancelButton(){
 }
 
 function saveButton(){
-  console.log("testing save button");
+  console.log($("form").serialize());
 }
 
 function onError(err){
