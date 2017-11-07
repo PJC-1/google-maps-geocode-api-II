@@ -1,5 +1,3 @@
-console.log("testing edit location...");
-
 var windowPath;
 var windowPathSplit;
 var id;
@@ -48,9 +46,6 @@ function submitButton(){
 }
 
 function newReqSuccess(result){
-  console.log(result.results[0].geometry.location.lat);
-  console.log(result.results[0].geometry.location.lng);
-  console.log(result.results[0].formatted_address);
   $("#formTarget").empty();
   var output = `
     <form id="location-form">
@@ -69,12 +64,10 @@ function newReqSuccess(result){
 }
 
 function cancelButton(){
-  console.log("testing cancel button");
   window.location.href = '/locations/' + id;
 }
 
 function saveButton(){
-  console.log($("form").serialize());
   $.ajax({
     method: "PUT",
     url: url,
@@ -85,7 +78,6 @@ function saveButton(){
 }
 
 function saveSuccess(result){
-  console.log(result);
   window.location.href = '/locations/' + id;
 }
 
