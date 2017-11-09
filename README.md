@@ -18,3 +18,5 @@ https://stackoverflow.com/questions/13168484/jquerys-serialize-doesnt-do-anythin
 - When dynamically creating html output creating the data-id, I had to change this attribute name to data-location-id, and then use jquery to access the `_id` by doing something like `var id = $(this).closest('.location').data('location-id');`
 - Helpful link to google maps API documentation for removing markers
 https://developers.google.com/maps/documentation/javascript/examples/marker-remove
+- A good link for removing a previous marker:
+https://stackoverflow.com/questions/42020268/remove-previous-marker-google-maps
