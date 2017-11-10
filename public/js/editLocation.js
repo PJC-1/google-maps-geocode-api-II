@@ -28,7 +28,8 @@ function onSuccess(result){
       <input type="text" name="location" id="location-input" value="${result.address}" class="form-control form-control-lg">
       <br>
     </form>
-    <button onclick="submitButton()" class="btn btn-primary btn-group btn-lg">submit</button>
+    <button onclick="submitButton()" class="btn btn-primary btn-group btn-lg">submit (request from server)</button>
+    <button onclick="submitButton2()" class="btn btn-info btn-group btn-lg">submit (request from the client)</button>
   `;
   $("#formTarget").append(output);
   var lat = result.latitude;
@@ -44,6 +45,25 @@ function submitButton(){
     success: newReqSuccess,
     error: onError
   });
+}
+
+function submitButton2(){
+  console.log("testing submit button 2...");
+  let apiKEY = "AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs";
+  let baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+  let address = $("#location-input").val();
+  let url = baseURL + address + "&key=" + apiKEY;
+  $.ajax({
+    method: "GET",
+    url: url,
+    dataType: "json",
+    success: submitRequest2,
+    error: onError
+  });
+}
+
+function submitRequest2(result){
+  console.log(result);
 }
 
 function newReqSuccess(result){
