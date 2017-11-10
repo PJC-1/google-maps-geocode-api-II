@@ -2,7 +2,6 @@ var windowPath;
 var windowPathSplit;
 var id;
 var url;
-// var markers = [];
 var marker;
 
 $(document).ready(function(){
@@ -23,20 +22,6 @@ $(document).ready(function(){
 
 });
 
-// function setMapOnAll(map){
-//   for(var i = 0; i < markers.length; i++){
-//     markers[i].setMap(map);
-//   }
-// }
-
-// function showMarkers(){
-//   setMapOnAll(map);
-// }
-//
-// function clearMarkers(){
-//   setMapOnAll(null);
-// }
-
 function onSuccess(result){
   var output = `
     <form id="location-form">
@@ -49,7 +34,6 @@ function onSuccess(result){
   var lat = result.latitude;
   var lng = result.longitude;
   addMarker(lat,lng,map);
-  // showMarkers();
 }
 
 function submitButton(){
@@ -63,7 +47,6 @@ function submitButton(){
 }
 
 function newReqSuccess(result){
-  // clearMarkers();
   $("#formTarget").empty();
   var output = `
     <form id="location-form">
@@ -83,7 +66,6 @@ function newReqSuccess(result){
     marker.setMap(null);
   }
   addMarker(lat,lng,map);
-  // showMarkers();
 }
 
 function cancelButton(){
@@ -114,7 +96,6 @@ function addMarker(latitude,longitude,useMap){
         position: latLng,
         map:useMap
     });
-    // markers.push(marker);
 }
 
 
