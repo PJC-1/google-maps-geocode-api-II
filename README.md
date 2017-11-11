@@ -20,3 +20,5 @@ https://stackoverflow.com/questions/13168484/jquerys-serialize-doesnt-do-anythin
 https://developers.google.com/maps/documentation/javascript/examples/marker-remove
 - A good link for removing a previous marker:
 https://stackoverflow.com/questions/42020268/remove-previous-marker-google-maps
+- stackoverflow about changing the map's center:
+https://stackoverflow.com/questions/12554688/how-to-dynamically-change-the-centre-of-a-google-maps-without-erasing-markers

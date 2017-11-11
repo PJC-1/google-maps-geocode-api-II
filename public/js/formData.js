@@ -4,6 +4,7 @@ var map;
 var lat;
 var lng;
 var address;
+var marker;
 
 $(document).ready(function(){
     initMap();
@@ -24,7 +25,7 @@ $(document).ready(function(){
 
 function addMarker(latitude,longitude,useMap){
     var latLng = new google.maps.LatLng(latitude, longitude);
-    new google.maps.Marker({
+    marker = new google.maps.Marker({
         position: latLng,
         map:useMap
     });
@@ -37,6 +38,9 @@ function handleSuccess(results){
     lng = geocode.longitude;
     console.log("latitude ", lat);
     console.log("longitude ", lng);
+    if(marker){
+      marker.setMap(null);
+    }
     addMarker(lat,lng,map);
 }
 
