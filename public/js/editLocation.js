@@ -48,7 +48,6 @@ function submitButton(){
 }
 
 function submitButton2(){
-  console.log("testing submit button 2...");
   let apiKEY = "AIzaSyAD_OJUoh5BPPl1WUGJEl3G9WMj4taITLs";
   let baseURL = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
   let address = $("#location-input").val();
@@ -57,13 +56,9 @@ function submitButton2(){
     method: "GET",
     url: url,
     dataType: "json",
-    success: submitRequest2,
+    success: newReqSuccess,
     error: onError
   });
-}
-
-function submitRequest2(result){
-  console.log(result);
 }
 
 function newReqSuccess(result){
