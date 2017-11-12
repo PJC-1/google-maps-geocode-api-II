@@ -33,6 +33,9 @@ function addMarker(latitude,longitude,useMap){
 
 function handleSuccess(results){
     $("#locationTarget").empty();
+    // use some logic similar to how you check for a previous marker
+    // then figure out how to out put the previous address, so you can provide the user with,
+    // the "recently" added location and the "previously" added location.
     console.log(results);
     var geocode = results;
     lat = geocode.latitude;
