@@ -32,16 +32,24 @@ function addMarker(latitude,longitude,useMap){
 }
 
 function handleSuccess(results){
+    $("#locationTarget").empty();
     console.log(results);
     var geocode = results;
     lat = geocode.latitude;
     lng = geocode.longitude;
+    address = geocode.address;
+    var latLng = new google.maps.LatLng(lat, lng);
     console.log("latitude ", lat);
     console.log("longitude ", lng);
     if(marker){
       marker.setMap(null);
     }
+    map.setCenter({lat:lat,lng:lng});
     addMarker(lat,lng,map);
+    var output = `
+      <p><strong>Address: </strong> ${address}</p>
+    `;
+    $("#locationTarget").append(output);
 }
 
 function handleError(err){
